@@ -1,0 +1,26 @@
+Esta versión tira de spring boot 2.0
+
+Servidor de autenticación jwt. Funciona de la siguiente manera: AuthSecurityConfig configura
+los usuarios, contraseñas y roles y prepara el sistema para que salte el AuthenticationFilter
+cuando se solicite la url configurada (en estos momentos, "/auth").
+
+El constructor del AuthenticationFilter establece la url de petición de autenticación,
+el AuthenticationManager y la clave secreta (para jwt). Cuando se recibe la petición
+de autenticación salta el filtro con el proceso de autenticación. Éste genera un 
+LoginUser a partir del body (en json) de la petición y a continuación invoca el método
+authenticate() del AuthenticationManager. Este método se basa en la configuración previa
+de usuarios y contraseñas para generar un usuario autenticado o no. Si la autenticación es
+correcta se ejecuta el método successfulAuthentication, que genera un token jwt que contiene
+el usuario, sus roles y metainformación (como el tiempo de expiración del token)
+
+La aplicación define tres clases:
+
+* LoginUser: clase del modelo que almacena la info de usuario y password que envía el cliente
+para autenticarse.
+
+* AuthController: controlador para habilitar las peticiones post y que así se dispare el filtro.
+
+* AuthSecurityConfig: configura la seguridad. Declara usuarios, contraseñas y roles, y habilita
+el AuthenticationFilter para que realice la autenticación y procesamiento de la petición.
+
+* AuthenticationFilter: procesa la autenticación.
