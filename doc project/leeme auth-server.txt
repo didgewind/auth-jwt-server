@@ -11,7 +11,8 @@ LoginUser a partir del body (en json) de la petición y a continuación invoca e
 authenticate() del AuthenticationManager. Este método se basa en la configuración previa
 de usuarios y contraseñas para generar un usuario autenticado o no. Si la autenticación es
 correcta se ejecuta el método successfulAuthentication, que genera un token jwt que contiene
-el usuario, sus roles y metainformación (como el tiempo de expiración del token)
+el usuario, sus roles y metainformación (como el tiempo de expiración del token) y lo agrega
+a la respuesta
 
 La aplicación define tres clases:
 

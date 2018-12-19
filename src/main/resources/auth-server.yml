@@ -10,9 +10,13 @@ eureka:
       defaultZone: http://localhost:1111/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 5
+# Generamos id aleatorio para poder registrar diferentes instancias con eureka
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
       
 server:
-  port: 8888
+# Puerto aleatorio
+  port: ${PORT:0}
+#  port: 8888
  
 # Config propia
 app:

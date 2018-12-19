@@ -78,5 +78,6 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 
 		// agregamos al encabezado el token
 		res.addHeader("Authorization", "Bearer " + token);
+		logger.info("Petición de autenticación otorgada");
     }
 }
